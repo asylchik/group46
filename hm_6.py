@@ -16,18 +16,24 @@ print(selection_sort(number_list))
 
 
 def binary_search(element: int, number_list: list):
-    sorted_list = selection_sort(number_list)
-    left = 0
-    right = len(sorted_list) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if sorted_list[mid] == element:
-            return mid
-        elif sorted_list[mid] < element:
-            left = mid + 1
+    first = 0
+    last = len(number_list) - 1
+    result_ok = False
+    pos = -1
+    while first <= last:
+        middle = (first + last) // 2
+        if number_list[middle] == element:
+            result_ok = True
+            pos = middle
+            break
+        elif number_list[middle] < element:
+            first = middle + 1
         else:
-            right = mid - 1
-    return -1
+            last = middle - 1
+    if result_ok:
+        print(f'{element} найден на позиции {pos}')
+    else:
+        print('элемент не найден!')
 
 
-print(binary_search(7, number_list))
+binary_search(7, selection_sort(number_list))
